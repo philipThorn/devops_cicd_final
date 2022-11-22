@@ -1,6 +1,6 @@
 FROM python:3.11-slim
 
-WORKDIR /home/philip/cicd/devops_cicd
+WORKDIR /devops_cicd/shop_app
 
 COPY requirements.txt .
 
