@@ -1,6 +1,9 @@
 # Team name
 
 ## Team members
+ - Philip
+ - Albin
+ - Fredrik Buö
 
 ## Work Diary
 
