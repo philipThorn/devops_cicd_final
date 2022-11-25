@@ -1,15 +1,16 @@
 FROM python:3.11-slim
 
-WORKDIR /devops_cicd/shop_app
-
+WORKDIR /app
+# First we copy the requirements.txt
 COPY requirements.txt .
+RUN pip install -r requirements.txt
 
-RUN pip3 install -r requirements.txt
+# Then we copy the script just before its used, this allows the previous build to be cached
+COPY shop_app shop_app
 
-COPY hello_flask hello_flask
+ENV PYTHONUNBUFFERED=1
+ENV FLASK_APP shop_app
 
-EXPOSE 5000/tcp
-
-ENV FLASK_APP=hello_flask
+EXPOSE 5000
 
 CMD [ "flask", "run", "--host=0.0.0.0"]

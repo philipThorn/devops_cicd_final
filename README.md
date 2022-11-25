@@ -1,5 +1,3 @@
-# devops21 cicd final
+# Flask example
 
-## G Group assignment
-
-see: `GROUP_ASSIGNMENT_G.md`
+Based on the official [flask tutorial](https://github.com/pallets/flask/tree/main/examples/tutorial/flaskr)
