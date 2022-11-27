@@ -12,12 +12,12 @@ def create_app():
         [Flask]: [A flask server]
     """
     # TODO, don't store secrets in code
-    TEST_SECRET = '192b9bdd22ab9ed4d12e236c78afcb9a393ec15f71bbf5dc987d54727823bcbf'
+    test_secret = '192b9bdd22ab9ed4d12e236c78afcb9a393ec15f71bbf5dc987d54727823bcbf'
 
     # create and configure the app
     app = Flask(__name__)
     app.config.update(
-        SECRET_KEY=TEST_SECRET)
+        SECRET_KEY=test_secret)
     app.url_map.strict_slashes = False
 
     db.init_app(app)
