@@ -35,6 +35,17 @@ jobs:
       run: |
         python3 -m pytest tests/*
 
+    - name: get branch name
+      run: echo "BRANCH=${GITHUB_REF##*/}" >> $GITHUB_ENV
+
+    - name: Get branch tag
+      uses: haya14busa/action-cond@v1
+      id: condval
+      with:
+        cond: ${{ env.BRANCH == 'main' }}
+        if_true: "latest"
+        if_false: "${{ env.BRANCH }}_${{ github.sha }}"
+
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v2
 
