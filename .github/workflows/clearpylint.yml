@@ -2,11 +2,10 @@ name: Pylint
 
 on:
   push:
-    branches:
-    - 'fredriktest'
+    branches: Dev
   pull_request:
-    branches:
-    - 'fredriktest'
+    branches: Dev
+
 
 jobs:
   build:
