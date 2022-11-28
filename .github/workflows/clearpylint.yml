@@ -2,9 +2,11 @@ name: Pylint
 
 on:
   push:
-    branches: [ $default-branch ]
+    branches:
+    - 'fredriktest'
   pull_request:
-    branches: [ $default-branch ]
+    branches:
+    - 'fredriktest'
 
 jobs:
   build:
