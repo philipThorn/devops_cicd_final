@@ -14,8 +14,16 @@ jobs:
         image: ghcr.io/philipthorn/devops_cicd_final:fredrikprovar
         ports:
           - 5000:5000
+
+
     runs-on: ubuntu-latest
     steps:
+      - name: Log in to the Container registry
+        uses: docker/login-action@v2
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.MY_SECRET_TOKEN }}
       - uses: actions/checkout@v3
       - name: Test
         run: |
