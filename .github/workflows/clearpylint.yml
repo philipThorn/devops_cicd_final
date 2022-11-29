@@ -52,3 +52,5 @@ jobs:
         context: .
         push: true
         tags: ghcr.io/philipthorn/devops_cicd_final/shop_app:${{ steps.condval.outputs.value }}
+        cache-from: type=gha
+        cache-to: type=gha,mode=max
