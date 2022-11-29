@@ -51,4 +51,4 @@ jobs:
       with:
         context: .
         push: true
-        tags: ghcr.io/devops_cicd_final/shop_app:${{ steps.condval.outputs.value }}
+        tags: ghcr.io/philipthorn/devops_cicd_final/shop_app:${{ steps.condval.outputs.value }}
