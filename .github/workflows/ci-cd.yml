@@ -11,7 +11,7 @@ jobs:
   integration-test:
     services:
       web:
-        image: ghcr.io/devops_cicd_final
+        image: ghcr.io/devops_cicd_final:fredriktesting
         ports:
           - 5000:5000
     runs-on: ubuntu-latest
