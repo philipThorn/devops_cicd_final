@@ -36,6 +36,7 @@ jobs:
         username: ${{ github.actor }}
         password: ${{ secrets.MY_SECRET_TOKEN }}
 
+
     - name: Extract metadata (tags, labels) for Docker
       id: meta
       uses: docker/metadata-action@v2
