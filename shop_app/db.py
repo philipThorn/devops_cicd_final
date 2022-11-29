@@ -40,6 +40,3 @@ def close_db(exception=None):
 def init_app(app):
     """ init_app will register a tearing_down that closes the database after each request"""
     app.teardown_appcontext(close_db)
-
-
-# HEJ
