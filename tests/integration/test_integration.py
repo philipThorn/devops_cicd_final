@@ -5,7 +5,7 @@ def test_product(config):
     response = requests.get(
         config.base_url + '/product',
         timeout=config.TIMEOUT)
-    assert response.headers['content-type'] == 'application/json'
+    assert response.headers['content-type'] == 'text/html; charset=utf-8'
     assert response.status_code == 200
     assert {'id': 1,
             'name': 'Hammer',
