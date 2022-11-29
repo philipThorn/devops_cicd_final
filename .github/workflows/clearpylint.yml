@@ -13,7 +13,7 @@ jobs:
 
     services:
       web:
-        image: ghcr.io/philipthorn/devops_cicd_final/shop_app:latest
+        image: ghcr.io/philipthorn/devops_cicd_final/my_flask
 
     steps:
     - uses: actions/checkout@v3
