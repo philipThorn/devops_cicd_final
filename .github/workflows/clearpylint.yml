@@ -39,8 +39,8 @@ jobs:
       uses: docker/login-action@v2
       with:
           registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ 12i3ioaoid }}
+          username: "philipthorn"
+          password: ${{ secrets.MY_SECRET_TOKEN }}
 
     - name: Run integration tests with coverage
       run:  |
