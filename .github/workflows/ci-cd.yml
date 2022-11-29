@@ -11,7 +11,7 @@ jobs:
   integration-test:
     services:
       web:
-        image: shop_app
+        image: ghcr.io/devops_cicd_final/shop_app
         ports:
           - 5000:5000
     runs-on: ubuntu-latest
