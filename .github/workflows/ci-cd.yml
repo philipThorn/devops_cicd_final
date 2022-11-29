@@ -11,12 +11,12 @@ jobs:
   integration-test:
     services:
       web:
-        image: my_flask
+        image: shop_app
         ports:
           - 5000:5000
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - name: Smoke Test With Curl
+      - name: Test
         run: |
           pytest --cov=shop_app tests/integration
