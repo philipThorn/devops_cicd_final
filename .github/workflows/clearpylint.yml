@@ -13,7 +13,7 @@ jobs:
 
     services:
       web:
-        image: ghcr.io/philipthorn/devops_cicd_final/my_flask
+        image: ghcr.io/philipthorn/devops_cicd_final
         credentials:
           username: ${{ github.actor }}
           password: ${{ secrets.MY_SECRET_TOKEN }}
