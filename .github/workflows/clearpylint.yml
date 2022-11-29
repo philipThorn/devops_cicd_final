@@ -53,9 +53,9 @@ jobs:
       with:
           images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
 
-    - name: Run integration tests with coverage
-      run:  |
-        pytest --cov=shop_app tests/integration
+    # - name: Run integration tests with coverage
+    #   run:  |
+    #     pytest --cov=shop_app tests/integration
 
 
     - name: Build and push Docker image
