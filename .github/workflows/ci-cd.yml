@@ -51,7 +51,7 @@ jobs:
           docker build . --file Dockerfile --tag ${{ env.REPO }}/${{ env.IMAGE_NAME }}
 
       - name: Run flask server
-        run: docker run --network host -d -e MYSQL_HOST=${{ env.MYSQL_HOST }} -e MYSQL_PASSWORD=$MYSQL_PASSWORD -p 5000:5000 ${{ env.REPO_NAME }}/${{ env.IMAGE_NAME }}
+        run: docker run --network host -d -e MYSQL_HOST=${{ env.MYSQL_HOST }} -e MYSQL_PASSWORD=$MYSQL_PASSWORD -p 5000:5000 ${{ env.REPO }}/${{ env.IMAGE_NAME }}
 
       - name: Pytest
         run: |
