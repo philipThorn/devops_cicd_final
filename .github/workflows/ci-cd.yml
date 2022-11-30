@@ -12,7 +12,8 @@ jobs:
       MYSQL_DATABASE: example
       MYSQL_USER: username
       MYSQL_PASSWORD: password
-      IMAGE_NAME: my_flask
+      IMAGE_NAME: ${{ github.repository }}
+      REGISTRY: ghcr.io
 
     services:
       mysql:
@@ -27,6 +28,7 @@ jobs:
         options: --health-cmd "mysqladmin ping" --health-interval 15s --health-timeout 5s --health-retries 5
     steps:
       - uses: actions/checkout@v3
+
       - name: Setup & test DB
         run: |
           for sql_script in `ls ./sql/*.sql`;
@@ -36,11 +38,35 @@ jobs:
           done
           mysql --version
           mysql -h$MYSQL_HOST -D$MYSQL_DATABASE -u$MYSQL_USER -p$MYSQL_PASSWORD -e 'select * from products;'
+
       - name: Build the Docker image
         run: docker build . --file Dockerfile --tag ${{ env.IMAGE_NAME }}
+
       - name: Run flask server
         run: docker run --network host -d -e MYSQL_HOST=${{ env.MYSQL_HOST }} -e MYSQL_PASSWORD=$MYSQL_PASSWORD -p 5000:5000 ${{ env.IMAGE_NAME }}
+
       - name: Pytest
         run: |
           pip install -r requirements.txt
           pytest tests/integration
+
+      - name: Login to ghcr
+        uses: docker/login-action@v2
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.MY_SECRET_TOKEN }}
+
+      - name: Extract metadata (tags, labels) for Docker
+        id: meta
+        uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
+        with:
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
+        with:
+          context: .
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
