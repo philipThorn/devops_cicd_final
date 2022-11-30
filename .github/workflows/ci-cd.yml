@@ -15,7 +15,7 @@ jobs:
       MYSQL_DATABASE: example
       MYSQL_USER: username
       MYSQL_PASSWORD: password
-      IMAGE_NAME: my_flask
+      IMAGE_NAME:  ${{ github.repository }}
       REGISTRY: ghcr.io
 
     services:
