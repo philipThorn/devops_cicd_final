@@ -132,4 +132,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: ghcr.io/philipthorn/devops_cicd_final/my_flask:${{ steps.condval.outputs.value }}
+          tags: ${{ env.REGISTRY }}/${{ env.REPO }}/${{ env.IMAGE_NAME }}/${{ steps.condval.outputs.value }}
