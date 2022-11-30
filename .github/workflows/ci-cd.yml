@@ -42,6 +42,7 @@ jobs:
       - name: Build the Docker image
         run: |
           echo "REPO=${GITHUB_REPOSITORY,,}" >>${GITHUB_ENV}
+          echo ${REPO}
           docker build . --file Dockerfile --tag ${REPO}/${{ env.IMAGE_NAME }}
 
       - name: Run flask server
