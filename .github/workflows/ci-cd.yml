@@ -116,21 +116,21 @@ jobs:
         id: meta
         uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
         with:
-          images: ${{ env.REGISTRY }}/${{ env.REPO }}/${{ env.IMAGE_NAME }}
+          images: ${{ env.REGISTRY }}/${{ env.REPO }}/${{ env.IMAGE_NAME }}:${{ steps.vars.outputs.short_sha }}
           # flavor: |
           #   latest=true
 
-      - name: Get branch tag
-        run: |
-          echo "TAG=${{ github.ref_name }}/${{ steps.vars.outputs.short_sha }}" >> ${GITHUB_ENV}
-          echo "${{ env.TAG }}"
+      # - name: Get branch tag
+      #   run: |
+      #     echo "TAG=${{ github.ref_name }}/${{ steps.vars.outputs.short_sha }}" >> ${GITHUB_ENV}
+      #     echo "${{ env.TAG }}"
 
       - name: Build and push Docker image
         uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
         with:
           context: .
           push: true
-          tags: "${{ env.TAG }}"
+          tags: ${{ steps.meta.outputs.tags }}
 
           cache-from: type=gha
           cache-to: type=gha,mode=max
