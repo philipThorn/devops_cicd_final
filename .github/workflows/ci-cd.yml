@@ -132,5 +132,5 @@ jobs:
           push: true
           tags: ghcr.io/philipthorn/devops_cicd_final/my_flask:latest #${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.lables }}
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
+          # cache-from: type=gha
+          # cache-to: type=gha,mode=max
