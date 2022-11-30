@@ -122,7 +122,8 @@ jobs:
 
       - name: Get branch tag
         run: |
-          echo "${{ github.ref_name }}/${{ calculatedSha }}"
+          echo "TAG=${{ github.ref_name }}/${{ calculatedSha }}" >> ${GITHUB_ENV}
+          echo "${{ env.TAG }}"
 
       - name: Build and push Docker image
         uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
