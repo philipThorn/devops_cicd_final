@@ -12,6 +12,8 @@
  -  Test the app and the scripts
  -  Read about workflow
 
+
+
 ### Day 2
  -  Github repetation
  -  Installed Pylint
@@ -23,7 +25,12 @@
  -  Read about Github Actions
 
 ### Day 4
- -  Coverage configuration  
+ -  Coverage configuration
  -  GHCR
- -  Testing, int and unit
-   
+ -  Testing, integration and unit
+
+### Day 5
+ -  Deploy kubernetes
+ -  Features
+ -  "cleaned" in the project
+ -  Hand in screenshots
