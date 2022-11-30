@@ -71,7 +71,7 @@ jobs:
           echo ${{ env.REPO_NAME }}
           docker build . --file Dockerfile --tag ${{ env.REGISTRY }}/${{ env.REPO }}/${{ env.IMAGE_NAME }}
 
-      - name: Run flask           pip install -r requirements.txtserver
+      - name: Run flask
         run: docker run --network host -d -e MYSQL_HOST=${{ env.MYSQL_HOST }} -e MYSQL_PASSWORD=$MYSQL_PASSWORD -p 5000:5000 ${{ env.REGISTRY }}/${{ env.REPO }}/${{ env.IMAGE_NAME }}
 
       - name: Integration test with Pytest
@@ -100,5 +100,5 @@ jobs:
         with:
           context: .
           push: true
-          tags: ${{ steps.meta.outputs.tags }}
+          # tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
