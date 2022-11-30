@@ -89,10 +89,10 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.MY_SECRET_TOKEN }}
 
-      - name: Set outputs
+      - name: Create SHORT SHA
         id: vars
         run: echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
-      - name: Check outputs
+      - name: Check SHORT SHA
         run: echo ${{ steps.vars.outputs.sha_short }}
 
       - name: Extract metadata (tags, labels) for Docker
