@@ -2,7 +2,14 @@ name: Docker Image CI
 
 on:
   push:
-
+    branches:
+    - 'Dev'
+    - 'main'
+    - 'feature/**'
+  pull_request:
+    branches:
+    - 'Dev'
+    - 'main'
 
 jobs:
   build:
@@ -60,7 +67,7 @@ jobs:
           pytest --cov=shop_app tests/unit/
           python3 -m pytest tests/unit/
 
-      - name: lowercase REPO
+      - name: Lowercase REPO
         id: step_one
         run: |
           echo "REPO=${GITHUB_REPOSITORY,,}" >> ${GITHUB_ENV}
@@ -79,6 +86,26 @@ jobs:
           pytest --cov=shop_app tests/integration
           pytest tests/integration
 
+      - name: Set short git commit SHA
+        id: vars
+        run: |
+          calculatedSha=$(git rev-parse --short ${{ github.sha }})
+          echo "::set-output name=short_sha::$calculatedSha"
+
+      - name: Confirm git commit SHA output
+        run: echo ${{ steps.vars.outputs.short_sha }}
+
+      - name: Get branch name
+        run: echo "BRANCH=${GITHUB_REF##*/}" >> $GITHUB_ENV
+
+      - name: Get branch tag
+        uses: haya14busa/action-cond@v1
+        id: condval
+        with:
+          cond: ${{ env.BRANCH == 'main' }}
+          if_true: "latest"
+          if_false: "${{ env.BRANCH }}_${{ steps.vars.outputs.short_sha }}"
+
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
 
@@ -89,35 +116,10 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.MY_SECRET_TOKEN }}
 
-      # - name: Create SHORT SHA
-      #   id: vars
-      #   run: echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
-      # - name: Check SHORT SHA
-      #   run: echo ${{ steps.vars.outputs.sha_short }}
-
-      - name: Set short git commit SHA
-        id: vars
-        run: |
-          calculatedSha=$(git rev-parse --short ${{ github.sha }})
-          echo "::set-output name=short_sha::$calculatedSha"
-
-      - name: Confirm git commit SHA output
-        run: echo ${{ steps.vars.outputs.short_sha }}
-
-      - name: Extract metadata (tags, labels) for Docker
-        id: meta
-        uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
-        with:
-          images: ${{ env.REGISTRY }}/${{ env.REPO }}/${{ env.IMAGE_NAME }}
-          # flavor: |
-          #   latest=true
-
-      - name: Build and push Docker image
-        uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
+      - name: Build and push
+        uses: docker/build-push-action@v2
         with:
           context: .
           push: true
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.vars.outputs.short_sha }}
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
+          tags: ghcr.io/philipthorn/devops_cicd_final/my_flask:${{ steps.condval.outputs.value }}
+

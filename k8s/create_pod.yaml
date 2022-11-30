@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: flask-server-pod
+  labels:
+    environment: test
+    app: my_flask
+spec:
+  containers:
+    - name: my-flask
+      image: ghcr.io/philipthorn/devops_cicd_final/my_flask:dev
+      env: # Sätt databasens host i flask till servicenamnet
+        - name: MYSQL_HOST
+          value: mysql-service
+      envFrom: # Ladda password OBS! separera root password i separat secret i en prod miljö
+        - secretRef:
+            name: mysqldb-secrets
+  imagePullSecrets:
+    - name: webserver
