@@ -116,9 +116,9 @@ jobs:
         id: meta
         uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
         with:
-          images: ${{ env.REGISTRY }}/${{ env.REPO }}/${{ env.IMAGE_NAME }}
-          flavor: |
-            latest=true
+          images: type=raw,value=${{ steps.meta.outputs.tags }}-{{sha}}
+          # flavor: |
+          #   latest=true
 
       # - name: Get branch tag
       #   run: |
@@ -131,7 +131,7 @@ jobs:
           context: .
           push: true
           tags: |
-            type=raw,value=${{ steps.meta.outputs.tags }}-{{sha}}
+
           labels: ${{ steps.meta.outputs.labels }}
           # cache-from: type=gha
           # cache-to: type=gha,mode=max
