@@ -41,13 +41,7 @@ jobs:
 
 
       - name: Build the Docker image
-      - id : string
-        uses: ASzc/change-string-case-action@v1
-        with:
-          string: ${{ env.IMAGE_NAME }}
-        run: |
-          echo ""
-          docker build . --file Dockerfile --tag "${{ steps.string.outputs.lowercase }}"
+        run: docker build . --file Dockerfile --tag ${{ env.IMAGE_NAME }}
 
       - name: Run flask server
         run: docker run --network host -d -e MYSQL_HOST=${{ env.MYSQL_HOST }} -e MYSQL_PASSWORD=$MYSQL_PASSWORD -p 5000:5000 ${{ env.IMAGE_NAME }}
