@@ -1,6 +1,6 @@
 FROM python:3.11-slim
 
-WORKDIR /app
+WORKDIR /devops_cicd_final
 # First we copy the requirements.txt
 COPY requirements.txt .
 RUN pip install -r requirements.txt
