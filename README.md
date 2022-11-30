@@ -14,7 +14,5 @@ Based on the official [flask tutorial](https://github.com/pallets/flask/tree/mai
 
 ### Test 
  -  Run unit tests: pytest --cov=shop_app tests/unit
-
  -  Run integration tests: pytest --cov=shop_app tests/integration
-
  -  Run both tests: pytest --cov=shop_app

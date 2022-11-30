@@ -26,4 +26,4 @@
  -  Coverage configuration  
  -  GHCR
  -  Testing, int and unit
- -  
+   
