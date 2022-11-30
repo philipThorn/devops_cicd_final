@@ -21,6 +21,7 @@ def index():
         )
         products = cur.fetchall()
         return jsonify(
+            get_error_message(),
             include_column_names(
                 products,
                 cur.description))
@@ -42,5 +43,5 @@ def create_product():
     return jsonify({"error": "Failed to parse json"}), 400
 
 
-# def get_error_message():
-#     return "Error"
+def get_error_message():
+    return "HELLO THIS APP IS AWESOME!"
