@@ -120,4 +120,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: ghcr.io/philipthorn/devops_cicd_final/my_flask:${{ steps.condval.outputs.value }}
+          tags: ghcr.io/philipthorn/devops_cicd_final/my_flask_${{ steps.condval.outputs.value }}
