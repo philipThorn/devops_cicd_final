@@ -62,6 +62,8 @@ jobs:
           mysql --version
           mysql -h$MYSQL_HOST -D$MYSQL_DATABASE -u$MYSQL_USER -p$MYSQL_PASSWORD -e 'select * from products;'
 
+      - name: Read Docker Image Identifiers
+        run: echo ::set-env name=IMAGE_NAME::$(echo ${{ github.repository }} | tr '[:upper:]' '[:lower:]')
 
       - name: Build the Docker image
         run: docker build . --file Dockerfile --tag ${{ env.REGISTRY }}/${{ env.IMAGE_NAME,, }}
