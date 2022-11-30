@@ -67,7 +67,7 @@ jobs:
           pytest --cov=shop_app tests/unit/
           python3 -m pytest tests/unit/
 
-      - name: lowercase REPO
+      - name: Lowercase REPO
         id: step_one
         run: |
           echo "REPO=${GITHUB_REPOSITORY,,}" >> ${GITHUB_ENV}
@@ -91,10 +91,11 @@ jobs:
         run: |
           calculatedSha=$(git rev-parse --short ${{ github.sha }})
           echo "::set-output name=short_sha::$calculatedSha"
+
       - name: Confirm git commit SHA output
         run: echo ${{ steps.vars.outputs.short_sha }}
 
-      - name: get branch name
+      - name: Get branch name
         run: echo "BRANCH=${GITHUB_REF##*/}" >> $GITHUB_ENV
 
       - name: Get branch tag
