@@ -48,10 +48,10 @@ jobs:
         id: step_two
         run: |
           echo ${{ env.REPO_NAME }}
-          docker build . --file Dockerfile --tag ${{ env.REPO }}/${{ env.IMAGE_NAME }}
+          docker build . --file Dockerfile --tag ${{ env.REGISTRY }}/${{ env.REPO }}/${{ env.IMAGE_NAME }}
 
       - name: Run flask server
-        run: docker run --network host -d -e MYSQL_HOST=${{ env.MYSQL_HOST }} -e MYSQL_PASSWORD=$MYSQL_PASSWORD -p 5000:5000 ${{ env.REPO }}/${{ env.IMAGE_NAME }}
+        run: docker run --network host -d -e MYSQL_HOST=${{ env.MYSQL_HOST }} -e MYSQL_PASSWORD=$MYSQL_PASSWORD -p 5000:5000 ${{ env.REGISTRY }}/${{ env.REPO }}/${{ env.IMAGE_NAME }}
 
       - name: Pytest
         run: |
@@ -72,7 +72,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@98669ae865ea3cffbcbaa878cf57c20bbf1c6c38
         with:
-          images: ${{ env.REPO }}/${{ env.IMAGE_NAME }}
+          images: ${{ env.REGISTRY }}/${{ env.REPO }}/${{ env.IMAGE_NAME }}
 
       - name: Build and push Docker image
         uses: docker/build-push-action@ad44023a93711e3deb337508980b4b5e9bcdc5dc
