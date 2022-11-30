@@ -103,7 +103,7 @@ jobs:
         with:
           cond: ${{ env.BRANCH == 'main' }}
           if_true: "latest"
-          if_false: "${{ env.BRANCH }}_${{ steps.vars.outputs.short_sha }}"
+          if_false: "${{ env.BRANCH }}:${{ steps.vars.outputs.short_sha }}"
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
