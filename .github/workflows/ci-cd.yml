@@ -47,7 +47,7 @@ jobs:
       - name: Build the Docker image
         id: step_two
         run: |
-          echo ${{ REPO_NAME }}
+          echo ${{ env.REPO_NAME }}
           docker build . --file Dockerfile --tag ${{ env.REPO_NAME }}/${{ env.IMAGE_NAME }}
 
       - name: Run flask server
