@@ -20,10 +20,10 @@ def index():
             " ORDER BY name DESC"
         )
         products = cur.fetchall()
-        return jsonify(
-            include_column_names(
-                products,
-                cur.description))
+        return jsonify(get_error_message(),
+                       include_column_names(
+            products,
+            cur.description))
 
 
 @bp.route("/", methods=('POST',))
@@ -42,5 +42,5 @@ def create_product():
     return jsonify({"error": "Failed to parse json"}), 400
 
 
-# def get_error_message():
-#     return "Error"
+def get_error_message():
+    return "Error"
